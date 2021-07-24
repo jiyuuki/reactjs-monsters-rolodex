@@ -1,51 +1,41 @@
-import React, {Component} from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import CardList from './components/card-list/card-list-component'
 
-class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            monsters: [
-                {
-                    name: 'N. Gin',
-                    id: 'n-gin'
-                },
-                {
-                    name: 'Louise',
-                    id: 'louise'
-                },
-                {
-                    name: 'Nitrus Brio',
-                    id: 'nitrus-brio'
-                },
-                {
-                    name: 'Nefarious Tropy',
-                    id: 'nefarious-tropy'
-                },
-                {
-                    name: 'Nefarious Tropy (female)',
-                    id:  'nefarious-tropy-f'
-                },
-                {
-                    name: 'Neo Cortex',
-                    id:  'neo-cortex'
-                }
-            ]
-        }
+import './App.css'
+
+function App(props) {
+
+    const [ bosses, setBosses ] = useState([])
+    const [ searchField, setSearchField ] = useState('')
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(bosses => setBosses(bosses))
+    },[])
+
+    useEffect(() => {
+        console.log(searchField)
+    },[searchField])
+
+    const searchBosses = (target) => {
+        setSearchField({
+            searchField: target.value
+        })
     }
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    {
-                        this.state.monsters.map((monster) => {
-                            return <h1 key={ monster.key }> { monster.name } </h1>
-                        })
+    return (
+        <div className='App'>
+            <input 
+                type='search' 
+                placeholder='Search Bosses' 
+                onChange={
+                    ({ target }) => {
+                        searchBosses(target)
                     }
-                    <button onClick={() => this.setState({firstName: 'JiYuuki' })}>Click to change the name</button>
-                </header>
-            </div>
-        )
-    }
+                } />
+            <CardList bosses={bosses} />
+        </div>
+    )
 }
-export default App;
+
+export default App
