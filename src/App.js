@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import CardList from './components/card-list/card-list-component'
+import CardList from './components/CardList/CardListContainer'
 
 import './App.css'
+// HOC Container ???
 
 function App(props) {
 
