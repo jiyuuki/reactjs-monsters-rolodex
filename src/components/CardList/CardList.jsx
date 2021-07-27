@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../card/card-component'
 
-import './card-list.style.css'
+import './cardList.style.css'
 
 const CardList = (props) => (
     <div className='App'>
