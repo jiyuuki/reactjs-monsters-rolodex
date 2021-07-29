@@ -1,15 +1,29 @@
 import React from 'react'
 import './cardList.style.css'
-import Card from '../card/Card'
+import Card from '../Card/Card'
+import SkeletonCard from '../Skeletons/SkeletonCard'
 
-export default (props) => (
-  <div className='App'>
-    <div className='card-list'>
-      {
-        props.bosses.map(bosse => (
-          <Card bosse={bosse} key={bosse.id} />
-        ))
-      }
+const CartList = (props) => {
+  const contentHtml = (
+    props.bosses.length === 0 ? (
+      [1,2,3,4,5].map(() => (
+        <SkeletonCard />
+      ))
+    ) : (
+      props.bosses.map(bosse => (
+        <Card bosse={bosse} key={bosse.id} />
+      ))
+    )
+    
+  )
+
+  return [
+    <div className='App'>
+      <div className='card-list'>
+        {contentHtml}
+      </div>
     </div>
-  </div>
-)
+  ]
+}
+
+export default CartList

@@ -3,17 +3,19 @@ import CardList from './CardList'
 
 const CardListContainer = () => {
   const [ bosses, setBosses ] = useState([])
-  const [ searchField, setSearchField ] = useState('')
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then(bosses => setBosses(bosses))
+    setTimeout(() => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(bosses => setBosses(bosses))
+    },3000)
   },[])
+ 
+  return [
+    <CardList bosses={bosses}/>
+  ]
 
-  return (
-    <CardList bosses={bosses} />
-  )
 }
 
 export default CardListContainer
