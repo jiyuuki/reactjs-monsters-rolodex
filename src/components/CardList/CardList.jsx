@@ -1,16 +1,16 @@
 import React from 'react'
-import './cardList.style.css'
+import './cardList.css'
 import Card from '../Card/Card'
 import SkeletonCard from '../Skeletons/SkeletonCard'
 
-const CartList = (props) => {
+const CartList = ({ bosses }) => {
   const contentHtml = (
-    props.bosses.length === 0 ? (
+    bosses.length === 0 ? (
       [1,2,3,4,5].map(() => (
         <SkeletonCard />
       ))
     ) : (
-      props.bosses.map(bosse => (
+      bosses.map(bosse => (
         <Card bosse={bosse} key={bosse.id} />
       ))
     )

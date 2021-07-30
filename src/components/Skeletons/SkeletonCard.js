@@ -1,5 +1,5 @@
 import React from 'react'
-import './skeleton.style.css'
+import './skeleton.css'
 import Skeleton from '@material-ui/lab/Skeleton'
 
 const SkeletonCard = () => {
