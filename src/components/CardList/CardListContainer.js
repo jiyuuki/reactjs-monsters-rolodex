@@ -6,22 +6,31 @@ const CardListContainer = () => {
   const [ bosses, setBosses ] = useState([])
   const [ searchField, setSearchField ] = useState('')
 
-  const handleChange = ({ target }) => {
-    setSearchField(target.value)
-    setBosses(bosses.filter((bosse) => bosse.name.toLowerCase().includes(searchField.toLocaleLowerCase())))
+  const filterBosses = () => {
+    return bosses.filter((bosse) => bosse.name.toLowerCase().includes(searchField.toLocaleLowerCase()))
+  } 
+
+  const handleChange = (value) => {
+    setSearchField(value)
   }
+
+  console.log({
+    log: 'bosses',
+    bosses: bosses,
+    filterBosses: filterBosses()
+  })
 
   useEffect(() => {
     setTimeout(() => {
       fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(bosses => setBosses(bosses))
-    },3000)
+    },300)
   },[])
- 
+  
   return [
-    <SearchBox type={'search'} placeholder={'Search box'} handleChange={({ target }) => handleChange({ target }) } />,
-    <CardList bosses={bosses}/>
+    <SearchBox type={'search'} placeholder={'Search box'} handleChange={({ target }) => handleChange(target.value) } />,
+    <CardList bosses={filterBosses()}/>
   ]
 
 }
