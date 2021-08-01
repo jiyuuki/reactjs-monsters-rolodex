@@ -29,6 +29,7 @@ const CardListContainer = () => {
   },[])
   
   return [
+    <h1 className="title">Bosses Rolodex</h1>,
     <SearchBox type={'search'} placeholder={'Search box'} handleChange={({ target }) => handleChange(target.value) } />,
     <CardList bosses={filterBosses()}/>
   ]
